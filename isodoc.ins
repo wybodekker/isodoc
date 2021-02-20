@@ -33,27 +33,26 @@ and version 1.2 or later is part of all distributions of LaTeX version
 
 \endpreamble
 
-\generate{\file{isodoc.cls     }{\from{isodoc.dtx}{class}}
-          \file{README         }{\from{isodoc.dtx}{readme}}
+\generate{\file{isodoc.cls}{\from{isodoc.dtx}{class}}
           \nopreamble\nopostamble
-          \file{accept.tex     }{\from{isodoc.dtx}{accepttex}}
-          \file{accept.sty     }{\from{isodoc.dtx}{acceptsty}}
-          \file{invoice.tex    }{\from{isodoc.dtx}{invoicetex}}
-          \file{invoice.sty    }{\from{isodoc.dtx}{invoicesty}}
-          \file{letter.tex     }{\from{isodoc.dtx}{lettertex}}
-          \file{letter.sty     }{\from{isodoc.dtx}{lettersty}}
-          \file{logoletter.tex }{\from{isodoc.dtx}{logolettertex}}
-          \file{logoletter.sty }{\from{isodoc.dtx}{logolettersty}}
-          \file{ntgletter.tex  }{\from{isodoc.dtx}{ntglettertex}}
-          \file{ntgletter.sty  }{\from{isodoc.dtx}{ntglettersty}}
-          \file{files.zip.uue }{\from{isodoc.dtx}{files}}
-          \file{listkeys.sh    }{\from{isodoc.dtx}{listkeys}}    
+          \file{README.md}{\from{isodoc.dtx}{readme}}
+          \file{accept.tex}{\from{isodoc.dtx}{accepttex}}
+          \file{accept.sty}{\from{isodoc.dtx}{acceptsty}}
+          \file{invoice.tex}{\from{isodoc.dtx}{invoicetex}}
+          \file{invoice.sty}{\from{isodoc.dtx}{invoicesty}}
+          \file{letter.tex}{\from{isodoc.dtx}{lettertex}}
+          \file{letter.sty}{\from{isodoc.dtx}{lettersty}}
+          \file{logoletter.tex}{\from{isodoc.dtx}{logolettertex}}
+          \file{logoletter.sty}{\from{isodoc.dtx}{logolettersty}}
+          \file{ntgletter.tex}{\from{isodoc.dtx}{ntglettertex}}
+          \file{ntgletter.sty}{\from{isodoc.dtx}{ntglettersty}}
+          \file{files.zip.uue}{\from{isodoc.dtx}{files}}
+          \file{listkeys.sh}{\from{isodoc.dtx}{listkeys}}    
           \catcode`\	12
-          \file{Makefile       }{\from{isodoc.dtx}{make}}
+          \file{Makefile}{\from{isodoc.dtx}{make}}
 }
 \directlua{
  os.rename("Makefile.tex","Makefile")
- os.rename("README.tex","README")
 }
 
 \obeyspaces

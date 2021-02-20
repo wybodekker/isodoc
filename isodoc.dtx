@@ -27,7 +27,7 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<class>\ProvidesClass{isodoc}%
 %<*class>
-   [2020/07/16 v1.11 isodoc class for letters and invoices]
+   [2021/02/20 v1.12 isodoc class for letters and invoices]
 %</class>
 %<*driver>
 \documentclass{ltxdoc}
@@ -298,6 +298,12 @@
 %  - daystext was typeset twice
 %  - payment data terminology and footer headers all lower case 
 %    (except for German)
+% }
+% \changes{v1.12}{2021/02/20}{
+%  - For some reason letter body now needs to start with par command, can't find
+%    out which package causes this.
+%  - isodoc.ins syntax did'nt work, probably because of changes in luatex?
+%  - small changes because of move from bitbucket to github
 % }
 % \DoNotIndex{%
 % \,\",\',\@auxout,\AtBeginDocument,\AtEndDocument,\AtEndOfClass,\ClassError,
@@ -2066,7 +2072,7 @@ accountname;payref;vatno;chamber}
     \end{textblock}
   }
   \subjectpos=\headerpos
-  \textskip=\headerpos\advance\textskip-12
+  \textskip=\headerpos\advance\textskip-14
   \ifx\subject\empty\advance\textskip-10\else\advance\subjectpos10\fi
   \openingpos=\subjectpos
   \ifheader
@@ -2114,7 +2120,7 @@ accountname;payref;vatno;chamber}
   \noindent\isodoc@Tbox{35}{\openingpos}{140}{\opening\@openingcomma}
   \vspace{\textskip mm}
   \thispagestyle{empty}
-  \noindent\ignorespaces#2
+  \par\noindent\ignorespaces#2
   \ifclosing{\vskip\closingskip\vskip-\baselineskip
     \parindent=0pt\parskip=\baselineskip\noindent
     \begin{minipage}[t]{\hsize}
@@ -3292,16 +3298,16 @@ inst: $(NAME).pdf
 	rm -rf $(UTREE)/{tex,source,doc}/latex/$(NAME)/*
 	cp $(NAME).dtx $(UTREE)/source/latex/$(NAME)
 	cp $(NAME).cls $(UTREE)/tex/latex/$(NAME)
-	cp $(NAME).pdf README $(UTREE)/doc/latex/$(NAME)
+	cp $(NAME).pdf README.md $(UTREE)/doc/latex/$(NAME)
 install: $(NAME).pdf
 	sudo mkdir -p $(LOCAL)/{tex,source,doc}/latex/$(NAME)
 	sudo rm -rf $(LOCAL)/{tex,source,doc}/latex/$(NAME)/*
 	sudo cp $(NAME).dtx $(LOCAL)/source/latex/$(NAME)
 	sudo cp $(NAME).cls $(LOCAL)/tex/latex/$(NAME)
-	sudo cp $(NAME).pdf README $(LOCAL)/doc/latex/$(NAME)
+	sudo cp $(NAME).pdf README.md $(LOCAL)/doc/latex/$(NAME)
 zip: $(NAME).pdf
 	ln -sf . $(NAME)
-	zip -Drq $(PWD)/$(NAME)-$(VERS).zip $(NAME)/{README,$(NAME).{pdf,dtx,ins}}
+	zip -Drq $(PWD)/$(NAME)-$(VERS).zip $(NAME)/{README.md,$(NAME).{pdf,dtx,ins}}
 	rm $(NAME)
 help:
 	@ echo "make help	Print this help"
@@ -3363,7 +3369,7 @@ if [[ $type == show ]]; then
 else
    which cols >/dev/null || {
       echo "listkeys needs the cols script; you can find that here:"
-      echo "https://bitbucket.org/wybodekker/cols/src/7af1a60161bf2ce45a3842582475de7eb621a1cf/cols?at=default"
+      echo "https://github.com/wybodekker/cols"
       echo "or here:"
       echo "http://www.dekkerdocumenten.nl/unix/cols"
       exit 1
@@ -12718,13 +12724,16 @@ AAAADwAPAOMEAADkZAYAAAA=
 ====
 %</files>
 %<*readme>
-|
--------:|:--------------------------------------
- isodoc:| LaTeX class used for typesetting of letters and invoices
- Author:| Wybo Dekker
- E-mail:| wybo@dekkerdocumenten.nl
-License:| Released under the LaTeX Project Public License v1.3c or later
-    See:| http://www.latex-project.org/lppl.txt
+# isodoc
+|    key | description
+|    ---:|:---
+| isodoc | LaTeX class used for typesetting of letters and invoices
+|version | 1.12
+|   date | 2021-02-20
+| author | Wybo Dekker
+|  email | wybo@dekkerdocumenten.nl
+|license | Released under the LaTeX Project Public License v1.3c or later
+|    see | http://www.latex-project.org/lppl.txt
 
 Short description:
 The isodoc class is used for the preparation of letters and invoices.
@@ -12738,7 +12747,7 @@ These can individually be compiled, which may be useful for users to
 experiment with.
 
 Full documentation:
-https://bitbucket.org/wybodekker/isodoc/downloads/isodoc.pdf
+http://mirrors.ctan.org/macros/latex/contrib/isodoc/isodoc.pdf
 
 Installation:
 1. Copy isodoc.dtx and isodoc.ins in an empty directory
