@@ -27,25 +27,23 @@
 %<class>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
 %<class>\ProvidesClass{isodoc}%
 %<*class>
-   [2021/02/20 v1.12 isodoc class for letters and invoices]
+   [2021/02/20 v1.13 isodoc class for letters and invoices]
 %</class>
 %<*driver>
 \documentclass{ltxdoc}
 \usepackage{ctable,pdfpages,paralist,sverb,ltablex}
-\usepackage[margin=20mm,left=50mm,nohead]{geometry}
-\usepackage{silence,luatex85}
+\usepackage[a4paper,margin=20mm,left=50mm,nohead]{geometry}
+\usepackage{silence}
 \WarningFilter{latex}{Marginpar on page}
 \usepackage{fontspec}
-\protrudechars=2
-\adjustspacing=2
-\newfontfeature{Microtype}{protrusion=default;expansion=default}
-\directlua{fonts.protrusions.setups.default.factor=.5}
-\setmainfont[Microtype,
-             Ligatures=TeX,
+\usepackage{microtype}
+% suppress microtype warnings - may become unnecessary with microtype > v2.8:
+\makeatletter\def\MT@warn@unknown{}\makeatother
+\setmainfont[Ligatures=TeX]{Fontin-Regular}[%
 	     ItalicFont=Fontin-Italic,
              BoldFont=Fontin-Bold,
              SmallCapsFont=Fontin-SmallCaps
-            ]{Fontin-Regular}
+            ]
 \setmonofont{DejaVuSansMono}[Scale=MatchLowercase]
 \usepackage{hyperref}
 \IndexMin=1580pt
@@ -305,6 +303,9 @@
 %  - isodoc.ins syntax did'nt work, probably because of changes in luatex?
 %  - small changes because of move from bitbucket to github
 % }
+% \changes{v1.13}{2021/06/12}{
+%  - Under texlive 2021 header fields disappeared in letter
+% }
 % \DoNotIndex{%
 % \,\",\',\@auxout,\AtBeginDocument,\AtEndDocument,\AtEndOfClass,\ClassError,
 % \ClassWarning,\CurrentOption,\DeclareOption,\DescribeMacro,\ForEachX,
@@ -331,11 +332,11 @@
 % }
 %
 % \GetFileInfo{\jobname.dtx}
-%\title{The isodoc class\thanks{This file
-%   describes version \fileversion, last revised \filedate.}\\
+% \title{The isodoc class\thanks{This document describes
+%    version \fileversion, last revised \filedate.}\\
 % for letters, invoices, and more}
-%\author{Wybo Dekker\thanks{E-mail: wybo@dekkerdocumenten.nl}}
-%\date{Released \filedate}%
+% \author{Wybo Dekker\thanks{Email: wybo@dekkerdocumenten.nl}}
+% \date{\filedate}%
 % \maketitle
 % \begin{abstract}\noindent
 % The |isodoc| class can be used for the preparation of letters,
@@ -2010,7 +2011,7 @@ accountname;payref;vatno;chamber}
 % |\letter| prints a letter...
 % The code is enclosed in an extra pair of braces, in order to keep option changes local
 %    \begin{macrocode}
-\newcommand{\letter}[2][]{{%
+\newcommand{\letter}[2][]{%
   \clearpage{\pagestyle{empty}\cleardoublepage}
   \setcounter{section}{0}
   \setkeys{isodoc}{#1}
@@ -2157,7 +2158,7 @@ accountname;payref;vatno;chamber}
     \end{minipage}
   }\fi
   \label{LastPageOf\thelettercount}
-}}
+} % end letter
 %    \end{macrocode}
 % \subsection{Internal Macros}
 % |\isodocFootFields| creates the foot fields. Defined here so you can easily replace them
@@ -3287,7 +3288,7 @@ files.zip: files.zip.uue
 	uudecode files.zip.uue
 files.zip.uue accept.tex accept.sty invoice.tex invoice.sty letter.tex letter.sty logoletter.tex logoletter.sty ntgletter.tex ntgletter.sty: isodoc.dtx isodoc.ins
 	luatex isodoc.ins
-clean:
+clean: iolang
 	./iolang -i 2> /dev/null
 	echo lang iolang README Makefile files.zip{,.uue} \
 	{Chopin,Fontin}*.ttf acceptform.jpg body.tex listkeys.sh logo[12].pdf \
