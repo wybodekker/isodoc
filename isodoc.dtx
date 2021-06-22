@@ -1199,18 +1199,20 @@
   \ifcsname isodoc@\@iso\endcsname\csname isodoc@\@iso\endcsname\else
     \ClassError{isodoc}{Unknown language #1}{}
   \fi
+}
 %    \end{macrocode}
 % \DescribeMacro{ordinalss}
 % Ordinal suffixes (like st, nd, rd, th) in dates are put on the line by
 % default, but they can be set superscript with the |ordinalss| option:
 %    \begin{macrocode}
 \define@key{isodoc}{ordinalss}[\@isodocordinalsstrue]{%
- \ifx\yourlettertext\undefined%
-   \@isodocordinalsstrue
- \else
-   \ClassError{isodoc}{
-     You must use the ordinalss option before any language option}
- \fi}
+  \ifx\yourlettertext\undefined%
+    \@isodocordinalsstrue
+  \else
+    \ClassError{isodoc}{
+      You must use the ordinalss option before any language option}{}
+  \fi
+}
  \newif\if@isodocordinalss\@isodocordinalssfalse
 %    \end{macrocode}
 % \DescribeMacro{fill}
