@@ -1195,7 +1195,10 @@
 % Set the language; en-GB, set at the |\EndOfClass| is the default.
 %    \begin{macrocode}
 \define@key{isodoc}{language}{
-  \StrSubstitute{#1}{-}{}[\@iso]\csname isodoc@\@iso\endcsname}
+  \StrSubstitute{#1}{-}{}[\@iso]
+  \ifcsname isodoc@\@iso\endcsname\csname isodoc@\@iso\endcsname\else
+    \ClassError{isodoc}{Unknown language #1}{}
+  \fi
 %    \end{macrocode}
 % \DescribeMacro{ordinalss}
 % Ordinal suffixes (like st, nd, rd, th) in dates are put on the line by
