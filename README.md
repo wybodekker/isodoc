@@ -2,8 +2,8 @@
 |    key | description
 |    ---:|:---
 | isodoc | LaTeX class used for typesetting of letters and invoices
-|version | 1.13
-|   date | 2021-06-22
+|version | 1.14
+|   date | 2021-06-25
 | author | Wybo Dekker
 |  email | wybo@dekkerdocumenten.nl
 |license | Released under the LaTeX Project Public License v1.3c or later
