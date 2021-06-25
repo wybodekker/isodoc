@@ -2,13 +2,15 @@
 % 
 % This is file `isodoc.dtx'
 %
-% Copyright (C) 2015 by Wybo Dekker <wybo@dekkerdocumenten.nl>
+% Copyright (C) 2005-2021 by Wybo Dekker <wybo@dekkerdocumenten.nl>
 %
 % This work may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.3
+% conditions of the LaTeX Project Public License, either version 1.3c
 % of this license or (at your option) any later version.
 % The latest version of this license is in
+%
 %   http://www.latex-project.org/lppl.txt
+%
 % and version 1.3 or later is part of all distributions of LaTeX
 % version 2005/12/01 or later.
 %
@@ -24,10 +26,10 @@
 %<*driver>
 \ProvidesFile{isodoc.dtx}
 %</driver>
-%<class>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%<class>\NeedsTeXFormat{LaTeX2e}[2005/12/01]
 %<class>\ProvidesClass{isodoc}%
 %<*class>
-   [2021/06/22 v1.13 isodoc class for letters and invoices]
+   [2021/06/25 v1.14 isodoc class for letters and invoices]
 %</class>
 %<*driver>
 \documentclass{ltxdoc}
@@ -308,6 +310,9 @@
 %  - Check validity of language option argument
 %  - Adapted to changes in new LaTeX version (headers disappeared)
 % }
+% \changes{v1.14}{2021/06/25}{
+%  - Use memoir with article option (again - got lost in version 1.13!)
+% }
 % \DoNotIndex{%
 % \,\",\',\@auxout,\AtBeginDocument,\AtEndDocument,\AtEndOfClass,\ClassError,
 % \ClassWarning,\CurrentOption,\DeclareOption,\DescribeMacro,\ForEachX,
@@ -403,7 +408,7 @@
 % ready to experiment with.
 %
 % \section{Class options}
-% The isodoc class is based on the |article| class and you can use the same
+% The isodoc class is based on the |memoir| class and you can use its
 % class options. Note, however, that if you change the font size from its
 % default (10pt) to an other value (11pt, 12pt) this applies to all text,
 % including headings, address label, et cetera. This is normally not what
@@ -1086,7 +1091,7 @@
 %}
 % \clearpage
 % \section{Implementation}
-% The basis is the |article| class with all options:
+% The basis is the |memoir| class with all options:
 %
 %    \begin{macrocode}
 %<*class>
@@ -1097,7 +1102,7 @@
 \fi
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{memoir}}
 \ProcessOptions
-\LoadClass{memoir}
+\LoadClass[article]{memoir}
 %    \end{macrocode}
 % We use |\ctable| floats here, and we need |ctable|'s commands for decent
 % spacing in tables and more. |ctable| also brings us |array|, |tabularx|,
@@ -2915,7 +2920,7 @@ accountname;payref;vatno;chamber}
 \end{document}
 %</accepttex>
 %<*acceptsty>
-\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{accept}
   [2010/08/21 v1.1 NTG style file for isodoc]
 \RequirePackage[english,dutch]{babel}
@@ -2993,7 +2998,7 @@ cityzip
 \end{document}
 %</invoicetex>
 %<*invoicesty>
-\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{invoice}
   [2010/08/21 v1.1 example style for isodoc]
 \RequirePackage[english,dutch]{babel}
@@ -3046,7 +3051,7 @@ cityzip
 \end{document}
 %</lettertex>
 %<*lettersty>
-\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{letter}
   [2010/08/21 v1.1 Letter Company style file for isodoc]
 \RequirePackage{pxfonts}
@@ -3125,7 +3130,7 @@ cityzip
 \end{document}
 %</logolettertex>
 %<*logolettersty>
-\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{logoletter}   
   [2010/08/21 v1.1 logoletter style file for isodoc]
 \usepackage{fontspec,polyglossia}
@@ -3200,7 +3205,7 @@ Kost 60 cent per week extra.
 \end{document}
 %</ntglettertex>
 %<*ntglettersty>
-\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+\NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{ntgletter}
   [2010/08/21 v1.1 NTG style file for isodoc]
 \RequirePackage[english,dutch]{babel}
@@ -12736,8 +12741,8 @@ AAAADwAPAOMEAADkZAYAAAA=
 |    key | description
 |    ---:|:---
 | isodoc | LaTeX class used for typesetting of letters and invoices
-|version | 1.13
-|   date | 2021-06-22
+|version | 1.14
+|   date | 2021-06-25
 | author | Wybo Dekker
 |  email | wybo@dekkerdocumenten.nl
 |license | Released under the LaTeX Project Public License v1.3c or later
