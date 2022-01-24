@@ -38,9 +38,7 @@
 \usepackage{silence}
 \WarningFilter{latex}{Marginpar on page}
 \usepackage{fontspec}
-\usepackage{microtype}
-% suppress microtype warnings - may become unnecessary with microtype > v2.8:
-\makeatletter\def\MT@warn@unknown{}\makeatother
+\usepackage[final]{microtype}
 \setmainfont[Ligatures=TeX]{Fontin-Regular}[%
 	     ItalicFont=Fontin-Italic,
              BoldFont=Fontin-Bold,
@@ -1122,7 +1120,7 @@
 \settrimmedsize{\stockheight}{\stockwidth}{*}
 \settypeblocksize{237mm}{140mm}{*}
 \setlrmargins{*}{*}{1}
-\setulmargins{35mm}{*}{*}
+\setulmargins{30mm}{*}{*}
 \setheadfoot{\baselineskip}{\baselineskip}
 \checkandfixthelayout
 \RequirePackage[absolute,overlay]{textpos}
@@ -3111,9 +3109,8 @@ cityzip
   It's in dutch, so we select that language; note that language setting has
   nothing to do with the language setting in \textbackslash setupdocument.
   \\[2ex]
-  \begin{dutch}
-    \par\input{body}
-  \end{dutch}
+  \selectlanguage{dutch}
+  \par\input{body}
 }
 
 \begin{document}
@@ -3133,7 +3130,8 @@ cityzip
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{logoletter}   
   [2010/08/21 v1.1 logoletter style file for isodoc]
-\usepackage{fontspec,polyglossia}
+\usepackage{fontspec}
+\usepackage[english,dutch]{babel}
 \hypersetup{hidelinks}
 \setupdocument{
   nofooter,fold2,autograph=1,
@@ -3149,7 +3147,7 @@ cityzip
   cellphone       = {6\,15492070},
   fax             = {},
   website         = wybo.xs4all.nl,
-  email           = wybo@xs4all,
+  email           = wybo@xs4all.nl,
   accountno       = {304046221},
   iban            = nl61pstb0006238747,
   bic             = pstbnl21,
@@ -3179,8 +3177,6 @@ cityzip
   \end{textblock}\fi
 }
 \setmainfont[Ligatures=TeX]{Fontin}
-\setdefaultlanguage{english}
-\setotherlanguage{dutch}
 %</logolettersty>
 %<*ntglettertex>
 \documentclass[11pt]{isodoc}
@@ -3302,7 +3298,7 @@ files.zip.uue accept.tex accept.sty invoice.tex invoice.sty letter.tex letter.st
 	luatex isodoc.ins
 clean: iolang
 	./iolang -i 2> /dev/null
-	echo lang iolang README Makefile files.zip{,.uue} \
+	echo lang iolang README README.md Makefile files.zip{,.uue} \
 	{Chopin,Fontin}*.ttf acceptform.jpg body.tex listkeys.sh logo[12].pdf \
 	{ntgcolor,shiva-shakti,sign{,blue,long,marked,short}}.png \
 	{accept,invoice,isodoc,{,logo,ntg}letter}.{aux,fls,log,out,pdf,sty,t2d,tex,cls,fls,glo,gls,idx,ilg,ind,sty,toc}|xargs rm -rf
